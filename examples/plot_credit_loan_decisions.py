@@ -44,6 +44,9 @@ warnings.simplefilter("ignore")
 rand_seed = 1234
 np.random.seed(rand_seed)
 
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
 # %%
 # Fairness considerations of credit loan decisions
 # ------------------------------------------------
