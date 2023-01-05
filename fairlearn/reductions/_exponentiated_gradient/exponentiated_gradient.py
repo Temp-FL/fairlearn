@@ -23,7 +23,6 @@ from ._constants import (
 )
 from ._lagrangian import _Lagrangian
 
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
