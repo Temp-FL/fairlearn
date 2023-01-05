@@ -36,6 +36,8 @@ from fairlearn.reductions import ExponentiatedGradient
 from fairlearn.reductions import EqualizedOdds
 from sklearn.model_selection import train_test_split
 import warnings
+import sklearn
+print(sklearn.__version__)
 
 warnings.simplefilter("ignore")
 
