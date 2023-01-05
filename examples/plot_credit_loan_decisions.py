@@ -150,7 +150,7 @@ np.random.seed(rand_seed)
 # In addition, the target variable :code:`default payment next month` is
 # changed to :code:`default` to reduce verbosity.
 
-data_url = "http://archive.ics.uci.edu/ml/machine-learning-databases/00350/default%20of%20credit%20card%20clients.xls"
+data_url = "examples/default of credit card clients.xls"
 dataset = (
     pd.read_excel(io=data_url, header=1)
     .drop(columns=["ID"])
@@ -158,6 +158,8 @@ dataset = (
         columns={"PAY_0": "PAY_1", "default payment next month": "default"}
     )
 )
+
+print(dataset)
 
 dataset.shape
 
