@@ -187,6 +187,8 @@ X = pd.get_dummies(dataset.drop(columns=["default", "SEX"]))
 
 A_str = A.map({1: "male", 2: "female"})
 
+print("Line 190")
+
 # %%
 # Dataset imbalances
 # ==================
@@ -257,6 +259,8 @@ X.loc[:, "Interest"] = np.random.normal(loc=2 * Y, scale=A)
 # We see that for both sexes, the :code:`Interest` feature is higher for
 # individuals who defaulted on their loan.
 
+print("Line 262")
+
 fig, (ax_1, ax_2) = plt.subplots(
     ncols=2, figsize=(10, 4), sharex=True, sharey=True
 )
@@ -277,6 +281,7 @@ X["Interest"][(A == 2) & (Y == 1)].plot(
     kind="kde", label="Payment Default", ax=ax_2, legend=True
 ).legend(bbox_to_anchor=(1.6, 1))
 
+print("Line 284")
 
 # %%
 # Training an initial model
@@ -1270,3 +1275,6 @@ metricframe_postprocess.overall[metrics_to_report]
 # these demographics features. However, `Chen et. al (2018)
 # <https://arxiv.org/abs/1811.11154>`_ show these imputation methods often
 # introduce new fairness-related issues.
+
+
+print("End")
