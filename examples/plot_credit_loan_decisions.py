@@ -314,6 +314,7 @@ def resample_training_data(X_train, Y_train, A_train):
     A_train = A_train.loc[balanced_ids]
     return X_train, Y_train, A_train
 
+print("Line 317")
 
 # %%
 X_train, X_test, y_train, y_test, A_train, A_test = train_test_split(
@@ -359,6 +360,8 @@ Y_pred = estimator.predict(X_test)
 # strong discriminant feature for the classification task.
 
 roc_auc_score(y_test, Y_pred_proba)
+
+print("Line 364")
 
 # %%
 # Feature Importance of the Unmitigated Classifier
@@ -477,6 +480,8 @@ lgb.plot_importance(
 # compute the *standard error* for each metric at the :math:`\alpha=0.95` confidence
 # level.
 
+print("Line 483")
+
 def compute_error_metric(metric_value, sample_size):
     """Compute standard error of a given metric based on the assumption of
     normal distribution.
@@ -495,7 +500,7 @@ def compute_error_metric(metric_value, sample_size):
         / np.sqrt(sample_size)
     )
 
-
+print("Line 503")
 def false_positive_error(y_true, y_pred):
     """Compute the standard error for the false positive rate estimate."""
     tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
@@ -535,6 +540,8 @@ metrics_to_report = [
     "false_negative_rate",
 ]
 
+print("Line 543")
+
 # %%
 # To compute the disaggregated performance metrics, we will use the
 # :code:`MetricFrame` object within the Fairlearn library. We will pass in our
@@ -556,6 +563,8 @@ metricframe_unmitigated.difference()[metrics_to_report]
 
 metricframe_unmitigated.overall[metrics_to_report]
 
+
+print("Line 567")
 
 # %%
 def plot_group_metrics_with_error_bars(metricframe, metric, error_name):
@@ -616,6 +625,9 @@ plot_group_metrics_with_error_bars(
 metricframe_unmitigated.by_group[metrics_to_report].plot.bar(
     subplots=True, layout=[1, 3], figsize=[12, 4], legend=None, rot=0
 )
+
+print("Line 629")
+
 
 # %%
 # Finally, let's compute the :code:`equalized_odds_difference` for this unmitigated
@@ -685,6 +697,8 @@ postprocess_est = ThresholdOptimizer(
     predict_method="predict_proba",
 )
 
+print("Line 700")
+
 # %%
 # One key limitation of the :code:`ThresholdOptimizer` is the need for sensitive
 # features during training and prediction time. If we do not have access to the
@@ -701,6 +715,8 @@ postprocess_pred = postprocess_est.predict(X_test, sensitive_features=A_test)
 postprocess_pred_proba = postprocess_est._pmf_predict(
     X_test, sensitive_features=A_test
 )
+
+print("Line 717")
 
 
 # %%
@@ -764,6 +780,7 @@ metricframe_postprocess.by_group[metrics_to_report].plot.bar(
     subplots=True, layout=[1, 3], figsize=[12, 4], legend=None, rot=0
 )
 
+print("Line 783")
 
 # %%
 # We see that the :code:`ThresholdOptimizer` algorithm achieves a much lower
@@ -832,8 +849,10 @@ def get_expgrad_models_per_epsilon(
         constraints=EqualizedOdds(difference_bound=epsilon),
     )
     # Is this an issue - Re-runs
+    print("Line 852 Learning from epsilons")
     exp_grad_est.fit(X_train, y_train, sensitive_features=A_train)
     predictors = exp_grad_est.predictors_
+    print("Line 852 Finished Learning from epsilons")
     return predictors
 
 
@@ -850,6 +869,7 @@ def get_expgrad_models_per_epsilon(
 # the order of the *square root* of the number of samples in the training
 # dataset:
 # :math:`\dfrac{1}{\sqrt{\text{numberSamples}}} \approx \dfrac{1}{\sqrt{25000}} \approx 0.01`
+print("Line 870")
 
 epsilons = [0.01, 0.02]
 
@@ -870,6 +890,7 @@ for epsilon, models in all_models.items():
         f"For epsilon {epsilon}, ExponentiatedGradient learned {len(models)} inner models"
     )
 
+print("Line 891")
 
 # %%
 # Here, we can see all the inner models learned for each value of
