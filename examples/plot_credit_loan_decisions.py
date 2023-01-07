@@ -1081,7 +1081,7 @@ plt.xlabel("Weighted Error Rate")
 plt.ylabel("Equalized Odds")
 plt.legend(bbox_to_anchor=(1.85, 1))
 
-
+logger.debug("Random Line")
 # %%
 # With the above plot, we can see how the performance of the non-dominated
 # inner models compares to the original unmitigated model. In many cases, we see
