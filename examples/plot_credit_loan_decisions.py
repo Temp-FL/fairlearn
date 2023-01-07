@@ -45,7 +45,7 @@ rand_seed = 1234
 np.random.seed(rand_seed)
 
 import logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 # %%
 # Fairness considerations of credit loan decisions
