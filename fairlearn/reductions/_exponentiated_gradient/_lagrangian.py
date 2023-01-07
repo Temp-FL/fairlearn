@@ -223,7 +223,7 @@ class _Lagrangian:
         estimator.fit(self.constraints.X, redY, **{self.sample_weight_name: redW})
         self.oracle_execution_times.append(time() - oracle_call_start_time)
         self.n_oracle_calls += 1
-
+        logger.debug("_call_oracle call finished")
         return estimator
 
     def best_h(self, lambda_vec):
@@ -264,7 +264,7 @@ class _Lagrangian:
             self.gammas[h_idx] = h_gamma
             self.lambdas[h_idx] = lambda_vec.copy()
             best_idx = h_idx
-
+        logger.debug("Best H call finished")
         return self.hs[best_idx], best_idx
 
 
