@@ -216,6 +216,7 @@ class _Lagrangian:
             # For sklearn estimators, it is more efficient as it would not
             # do a copy.deepcopy. Rather, instantiate a new estimator using the
             # get_params() internally.
+            logger.debug("Cloning inside _call_oracle")
             estimator = clone(estimator=self.estimator, safe=False)
 
         oracle_call_start_time = time()
@@ -232,6 +233,7 @@ class _Lagrangian:
         the vector of Lagrange multipliers `lambda_vec`.
         """
         classifier = self._call_oracle(lambda_vec)
+        logger.debug("Call Oracle")
 
         def h(X):
             pred = classifier.predict(X)
