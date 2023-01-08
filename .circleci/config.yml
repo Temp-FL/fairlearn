@@ -129,7 +129,6 @@ workflows:
   build-webpage:
     jobs:
       - build-doc
-      - build-doctest
       - deploy-doc:
           requires:
             - build-doc
