@@ -193,9 +193,11 @@ class _Lagrangian:
         return self.last_linprog_result
 
     def _call_oracle(self, lambda_vec):
+        logger.debug("Started assigning signed_weights")
         signed_weights = self.obj.signed_weights() + self.constraints.signed_weights(
             lambda_vec
         )
+        logger.debug("Finished assigning signed_weights")
         if isinstance(self.constraints, ClassificationMoment):
             redY = 1 * (signed_weights > 0)
         else:
@@ -218,9 +220,12 @@ class _Lagrangian:
             # get_params() internally.
             logger.debug("Cloning inside _call_oracle")
             estimator = clone(estimator=self.estimator, safe=False)
+            logger.debug("Cloning finished")
 
         oracle_call_start_time = time()
+        logger.debug("Fit Started")
         estimator.fit(self.constraints.X, redY, **{self.sample_weight_name: redW})
+        logger.debug("Fit Finished")
         self.oracle_execution_times.append(time() - oracle_call_start_time)
         self.n_oracle_calls += 1
         logger.debug("_call_oracle call finished")
